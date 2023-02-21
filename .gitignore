@@ -102,3 +102,10 @@ dist
 
 # TernJS port file
 .tern-port
+<<<<<<< HEAD
+=======
+
+.vscode
+.eslintrc.*
+.prettierrc.*
+>>>>>>> 9db2ba2 (Initial Vue setup)
