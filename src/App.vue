@@ -8,7 +8,9 @@ import NavBar from "./components/NavBar.vue";
     <NavBar />
   </header>
 
-  <RouterView />
+  <Suspense>
+    <RouterView />
+  </Suspense>
 </template>
 
 <style scoped>

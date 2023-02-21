@@ -5,7 +5,7 @@
     <div class="shaded">Blog</div>
     <nav id="nav-links">
       <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/about">About</RouterLink>
+      <RouterLink to="/signup">Sign Up</RouterLink>
       <!-- <RouterLink to="/clicker">Clicker</RouterLink> -->
     </nav>
   </div>
