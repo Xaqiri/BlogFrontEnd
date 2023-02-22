@@ -2,22 +2,31 @@
 import axios from "axios";
 import { ref } from "vue";
 
+const message = ref("Sign up");
 const user = ref("");
 const pass = ref("");
 const newUser = async () => {
-  user.value = await axios.post(
-    `http://localhost:8080/user?name=${user.value}&password=${pass.value}`
-  );
+  user.value = await axios
+    .post(
+      `http://localhost:8080/user?name=${user.value}&password=${pass.value}`
+    )
+    .catch((err) => (message.value = err));
   user.value = "";
   pass.value = "";
 };
 </script>
 
 <template>
-  <header>Sign up</header>
+  <header>{{ message }}</header>
   <form @submit.prevent="newUser">
-    <input v-model="user" type="text" name="user" />
-    <input v-model="pass" type="text" name="password" />
+    <input v-model="user" type="text" name="user" placeholder="name" required />
+    <input
+      v-model="pass"
+      type="text"
+      name="password"
+      placeholder="password"
+      required
+    />
     <button>Submit</button>
   </form>
 </template>
@@ -41,10 +50,15 @@ input {
   background: var(--color-background);
   color: hsla(200, 100%, 80%, 1);
   font-size: 16pt;
+  transition: 0.4s;
 }
 
 input:focus {
   outline: none;
+}
+
+.invalid {
+  border-color: hsla(0, 100%, 60%, 1);
 }
 
 button {

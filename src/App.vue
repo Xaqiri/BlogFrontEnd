@@ -7,10 +7,11 @@ import NavBar from "./components/NavBar.vue";
   <header>
     <NavBar />
   </header>
-
-  <Suspense>
-    <RouterView />
-  </Suspense>
+  <body>
+    <Suspense>
+      <RouterView />
+    </Suspense>
+  </body>
 </template>
 
 <style scoped>
@@ -18,20 +19,21 @@ header {
   line-height: 1.5;
   max-height: 100vh;
 }
-
+body {
+  padding: 0 1em;
+}
 .logo {
   display: block;
   margin: 0 auto 2rem;
 }
 
-nav {
+/* nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
-}
+} */
 
-nav a.router-link-exact-active {
+/* nav a.router-link-exact-active {
   color: var(--color-text);
 }
 
@@ -47,7 +49,7 @@ nav a {
 
 nav a:first-of-type {
   border: 0;
-}
+} */
 
 @media (min-width: 1024px) {
   header {

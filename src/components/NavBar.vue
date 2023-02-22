@@ -1,20 +1,18 @@
 <script setup lang="ts"></script>
 
 <template>
-  <div id="nav-bar">
-    <div class="shaded">Blog</div>
-    <nav id="nav-links">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/signup">Sign Up</RouterLink>
-      <!-- <RouterLink to="/clicker">Clicker</RouterLink> -->
-    </nav>
-  </div>
+  <nav id="nav-bar">
+    <div class="shaded"><RouterLink to="/">Blog</RouterLink></div>
+    <div id="nav-links"><RouterLink to="/signup">Sign Up</RouterLink></div>
+
+    <!-- <RouterLink to="/clicker">Clicker</RouterLink> -->
+  </nav>
 </template>
 
 <style scoped>
 #nav-bar {
   width: 100%;
-  padding: 0.5em;
+  padding: 0 0.5em;
   font-size: 24pt;
   display: flex;
   border-bottom: 2px solid cyan;

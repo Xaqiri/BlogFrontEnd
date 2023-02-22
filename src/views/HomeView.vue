@@ -1,35 +1,27 @@
 <script setup lang="ts">
 import { onMounted, type Ref, ref } from "vue";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
+import router from "@/router";
+import { useLink } from "vue-router";
 
-let test: string | any = ref("");
-
-// test.value = await fetch("http://localhost:8080/user", {
-//   mode: "cors",
-//   method: "GET",
-
-//   // headers: {
-//   //   Accept: "application/json",
-//   //   "Content-Type": "application/json",
-//   // },
-// })
-//   .then((res) => {
-//     return res.text();
-//   })
-//   .then((resp) => {
-//     console.log(resp);
-//     return resp;
-//   })
-//   .catch((e) => {
-//     console.log(e);
-//   });
-test.value = await axios
-  .get("http://localhost:8080/user")
-  .then((res) => res.data);
+let test: Ref<string> = ref("");
+onMounted(async () => {
+  test.value = await axios
+    .get("http://localhost:8080/user")
+    .then((res) => res.data)
+    .catch((err) => err);
+});
 </script>
-
 <template>
+  <header>{{ test }}</header>
   <main>
     <div>{{ test }}</div>
   </main>
 </template>
+
+<style scoped>
+header {
+  font-size: 32pt;
+  color: hsla(200, 100%, 80%, 1);
+}
+</style>
