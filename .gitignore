@@ -108,4 +108,5 @@ dist
 .vscode
 .eslintrc.*
 .prettierrc.*
+.idea
 >>>>>>> 9db2ba2 (Initial Vue setup)

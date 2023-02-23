@@ -3,7 +3,10 @@
 <template>
   <nav id="nav-bar">
     <div class="shaded"><RouterLink to="/">Blog</RouterLink></div>
-    <div id="nav-links"><RouterLink to="/signup">Sign Up</RouterLink></div>
+    <div id="nav-links">
+      <RouterLink to="/signup">Sign Up</RouterLink>
+      <RouterLink to="/signin">Sign In</RouterLink>
+    </div>
 
     <!-- <RouterLink to="/clicker">Clicker</RouterLink> -->
   </nav>

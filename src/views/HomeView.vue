@@ -4,24 +4,61 @@ import axios, { AxiosError } from "axios";
 import router from "@/router";
 import { useLink } from "vue-router";
 
-let test: Ref<string> = ref("");
+
+let message: Ref<string> = ref("");
+const todos = ref([])
 onMounted(async () => {
-  test.value = await axios
-    .get("http://localhost:8080/user")
-    .then((res) => res.data)
-    .catch((err) => err);
+  todos.value = await axios("https://topmembersonly.up.railway.app/api/messages", {
+    method: "get",
+    headers: {
+      withCredentials: false,
+      mode: "no-cors",
+      "Access-Control-Allow-Origin": "*",
+    },
+  })
+    .then((resp) => resp.data)
+    .catch((err) => message.value = err);
+  todos.value = todos.value.reverse()
 });
 </script>
 <template>
-  <header>{{ test }}</header>
-  <main>
-    <div>{{ test }}</div>
-  </main>
+  <header>{{ message }}</header>
+  <div>
+    <ul>
+      <li v-for="todo in todos" class="card">
+        <div class="todoTitle">{{ todo.title }}</div>
+        <div class="todoBody">{{todo.body}}</div>
+        <div class="todoUser">{{todo.user}}</div>
+        <div class="todoTimestamp">{{todo.timestamp}}</div>
+      </li>
+    </ul>
+  </div>
 </template>
 
 <style scoped>
 header {
   font-size: 32pt;
   color: hsla(200, 100%, 80%, 1);
+}
+
+ul {
+  margin: 1em;
+}
+
+li {
+  list-style: none;
+  margin-bottom: 0.5em;
+}
+
+.card {
+  border: 1px solid hsla(200, 100%, 80%, 1);
+  padding: 0.5em 1em;
+  box-shadow: 0.25em 0.25em hsla(200, 100%, 80%, 0.5);
+  color: hsla(200, 100%, 80%, 0.5);
+}
+.todoTitle {
+  font-size: 1.5em;
+  color: hsla(200, 100%, 80%, 1);
+  margin-left: 1.5em;
 }
 </style>

@@ -2,25 +2,9 @@
 import axios from "axios";
 import { ref } from "vue";
 
-const message = ref("Sign up");
+const message = ref("Sign In");
 const user = ref("");
 const pass = ref("");
-const newUser = async () => {
-  user.value = await axios(
-    `http://localhost:8080/user/add?name=${user.value}&password=${pass.value}`,
-    {
-      method: "post",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        mode: "cors",
-        "Access-Control-Allow-Origin": "*",
-      },
-    }
-  ).catch((err) => (message.value = err));
-  user.value = "";
-  pass.value = "";
-};
 </script>
 
 <template>
@@ -28,11 +12,11 @@ const newUser = async () => {
   <form @submit.prevent="newUser">
     <input v-model="user" type="text" name="user" placeholder="name" required />
     <input
-      v-model="pass"
-      type="text"
-      name="password"
-      placeholder="password"
-      required
+        v-model="pass"
+        type="text"
+        name="password"
+        placeholder="password"
+        required
     />
     <button>Submit</button>
   </form>
