@@ -21,10 +21,7 @@ header {
 }
 body {
   padding: 0 1em;
-}
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+  font-size: 1.5em;
 }
 
 /* nav {

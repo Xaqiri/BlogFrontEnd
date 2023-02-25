@@ -1,11 +1,19 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import { activeUser } from "@/stores/username";
+</script>
 
 <template>
   <nav id="nav-bar">
     <div class="shaded"><RouterLink to="/">Blog</RouterLink></div>
     <div id="nav-links">
-      <RouterLink to="/signup">Sign Up</RouterLink>
-      <RouterLink to="/signin">Sign In</RouterLink>
+      <div v-if="activeUser.activeUser ===''">
+        <RouterLink to="/signup">Sign Up</RouterLink>
+        <RouterLink to="/signin">Sign In</RouterLink>
+      </div>
+      <div v-else>
+        <RouterLink to="/post">Post</RouterLink>
+        <RouterLink to="/signout">Sign Out</RouterLink>
+      </div>
     </div>
 
     <!-- <RouterLink to="/clicker">Clicker</RouterLink> -->
@@ -25,7 +33,7 @@
   cursor: default;
 }
 
-#nav-links {
+#nav-links div {
   display: flex;
   font-size: 16pt;
   gap: 0.5em;

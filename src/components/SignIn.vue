@@ -1,22 +1,58 @@
 <script setup lang="ts">
 import axios from "axios";
 import { ref } from "vue";
-
+import { activeUser } from "@/stores/username";
+import router from "@/router";
 const message = ref("Sign In");
 const user = ref("");
 const pass = ref("");
+const loggedIn = ref({ } )
+const newUser = async () => {
+  const newU = {
+    username: user.value,
+    password: pass.value,
+  };
+
+    loggedIn.value = await axios.post(
+      "https://topmembersonly.up.railway.app/api/login", newU
+      // {
+      //   method: "post",
+      //   data: {
+      //     username: user,
+      //     password: pass,
+      //   },
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //     mode: "cors",
+      //     "Access-Control-Allow-Origin": "*",
+      //   },
+      // }
+    ).then(resp => resp.data)
+      .then(resp => {
+        return resp
+      })
+      .catch(e => message.value = e)
+  console.log(newU)
+  if (loggedIn.value.username) {
+    activeUser.activeUser = loggedIn.value.username
+  router.push("/")
+  } else {
+      message.value = loggedIn.value.message;
+  }
+  };
 </script>
 
 <template>
+  <div>{{activeUser.activeUser}}</div>
   <header>{{ message }}</header>
   <form @submit.prevent="newUser">
     <input v-model="user" type="text" name="user" placeholder="name" required />
     <input
-        v-model="pass"
-        type="text"
-        name="password"
-        placeholder="password"
-        required
+      v-model="pass"
+      type="text"
+      name="password"
+      placeholder="password"
+      required
     />
     <button>Submit</button>
   </form>

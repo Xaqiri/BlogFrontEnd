@@ -3,21 +3,24 @@ import axios from "axios";
 import { ref } from "vue";
 
 const message = ref("Sign up");
-const user = ref("");
+const user: any = ref("");
 const pass = ref("");
 const newUser = async () => {
   user.value = await axios(
-    `http://localhost:8080/user/add?name=${user.value}&password=${pass.value}`,
+    `https://topmembersonly.up.railway.app/api/signup`,
     {
       method: "post",
+      data: { first_name: "none", last_name: "none", username: user.value, password: pass.value},
       headers: {
-        Accept: "application/json",
+      Accept: "application/json",
         "Content-Type": "application/json",
         mode: "cors",
         "Access-Control-Allow-Origin": "*",
       },
     }
-  ).catch((err) => (message.value = err));
+  ).then(resp => resp.data)
+    .then(resp => console.log(resp))
+    .catch((err) => (message.value = `Error ${err.response.status}: ${err.response.data.error}`));
   user.value = "";
   pass.value = "";
 };
